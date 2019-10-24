@@ -1,23 +1,34 @@
+package steps;
+
+import cucumber.api.CucumberOptions;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.restassured.http.ContentType;
+import org.junit.runner.RunWith;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
 
+@CucumberOptions(  monochrome = true,
+        tags = "@tags",
+        features = "src/test/java/features",
+        format = { "pretty","html: cucumber-html-reports",
+                "json: cucumber-html-reports/cucumber.json" },
+        dryRun = false,
+        glue = "classpath:" )
+
+
 public class MyStepdefs {
     @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         given().contentType(ContentType.JSON);
     }
 
     @And("^I perform GET for the post number \"([^\"]*)\"$")
     public void iPerformGETForThePostNumber(String postNumber) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
                 then().body("author", is("saransh1337"));
     }
@@ -34,7 +45,6 @@ public class MyStepdefs {
         //Act
         //Assert
         //BDD Scheme
-
 
     }
 }
