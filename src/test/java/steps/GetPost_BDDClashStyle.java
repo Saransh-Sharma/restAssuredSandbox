@@ -17,14 +17,11 @@ import static org.hamcrest.CoreMatchers.is;
 public class GetPost_BDDClashStyle {
     @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
+        System.out.println("I perform GEToperation for posts");
         given().contentType(ContentType.JSON);
     }
 
-    @And("^I perform GET for the post number \"([^\"]*)\"$")
-    public void iPerformGETForThePostNumber(String postNumber) throws Throwable {
-        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
-                then().body("author", is("saransh1337"));
-    }
+
 
     @Then("^I should see the author name as \"([^\"]*)\"$")
     public void iShouldSeeTheAuthorNameAs(String arg0) throws Throwable {
@@ -39,5 +36,20 @@ public class GetPost_BDDClashStyle {
         //Assert
         //BDD Scheme
 
+    }
+
+    @And("^I perform GET for the post number \"([^\"]*)\"$")
+    public void iPerformGETForThePostNumber(String postNumber) throws Throwable {
+        System.out.println("I perform GET fir the post number "+postNumber);
+        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
+                then().body("author", is("saransh1337")); // <<--------------------- This seems wrong !
+        //I am forced to write rest assured 'then' here as it cant exist  as an orphan in the next step !
+    }
+
+    @And("^I perform GET for the post number \"([^\"]*)\" THEN see author name as \"([^\"]*)\"$")
+    public void iPerformGETForThePostNumberTHENSeeAuthorNameAs(String postNumber, String authorName) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
+                then().body("author", is("saransh1337"));
     }
 }
