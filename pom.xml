@@ -30,7 +30,7 @@
             <version>2.10.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
+        <!-- https://mvnrepository./Users/saransh1337/codeMonkey/Projects/restAssuredSandBox/src/test/java/featurejuncom/artifact/io.rest-assured/json-schema-validator -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
@@ -40,6 +40,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.5</version>
             <scope>test</scope>
         </dependency>
 
