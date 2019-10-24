@@ -8,6 +8,9 @@ import org.junit.runner.RunWith;
         ,glue={"steps"}
         ,monochrome = false
         ,dryRun = false
+        ,plugin = {"pretty" ,"html:REPORTS" ,
+        "json:REPORTS/cucumber.json" ,
+        "junit:REPORTS/cucumber.xml"}
 )
 
 public class TestRunner {
