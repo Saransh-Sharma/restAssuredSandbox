@@ -12,16 +12,9 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
 
-@CucumberOptions(  monochrome = true,
-        tags = "@tags",
-        features = "src/test/java/features",
-        format = { "pretty","html: cucumber-html-reports",
-                "json: cucumber-html-reports/cucumber.json" },
-        dryRun = false,
-        glue = "classpath:" )
 
 
-public class MyStepdefs {
+public class GetPost_BDDClashStyle {
     @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
         given().contentType(ContentType.JSON);
