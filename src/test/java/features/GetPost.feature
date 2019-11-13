@@ -1,5 +1,5 @@
 Feature:
-    Verify different GET operations using REST-assured
+    Verify different GET operations using cucumber BDD
 
     Scenario: Verify one author of the post
         Given I perform GET operation for "/post"

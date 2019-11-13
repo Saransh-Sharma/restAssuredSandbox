@@ -1,17 +1,14 @@
 package steps;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.restassured.http.ContentType;
-import org.junit.runner.RunWith;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
-
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 
 
 public class GetPost_BDDClashStyle {
@@ -29,7 +26,7 @@ public class GetPost_BDDClashStyle {
         //uh oh ! then(). cant exist on its own
         //this is when cuccumber and Rest Assured BDD styles are reduntant
         //the given, when, then Rest Assured is BDD by itself
-        //It doesnt make sense to have 2 styles of similar BDD in the same project
+        //It doesn't make sense to have 2 styles of similar BDD in the same project
         //So instead split this into
         //Arrange
         //Act
@@ -41,8 +38,9 @@ public class GetPost_BDDClashStyle {
     @And("^I perform GET for the post number \"([^\"]*)\"$")
     public void iPerformGETForThePostNumber(String postNumber) throws Throwable {
         System.out.println("I perform GET fir the post number "+postNumber);
-        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
-                then().body("author", is("saransh1337")); // <<--------------------- This seems wrong !
+        when().get(String.format("http://localhost:3000/posts/%s", postNumber)). //then().body("author", containsInAnyOrder("saransh1337", "saransh1337", null)).
+                then().body("author", is("saransh1337")).
+                statusCode(200); // <<--------------------- This seems wrong !
         //I am forced to write rest assured 'then' here as it cant exist  as an orphan in the next step !
     }
 
