@@ -26,16 +26,13 @@ public class GetPost2_AAA_BDD {
     }
 
     @Then("^I AAA_BDD should see the author name as \"([^\"]*)\"$")
-    public void iAAA_BDDShouldSeeTheAuthorNameAs(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iAAA_BDDShouldSeeTheAuthorNameAs(String name) throws Throwable {
+
     }
 
     @And("^I AAA_BDD perform GET for the post number \"([^\"]*)\" THEN see author name as \"([^\"]*)\"$")
-    public void iAAA_BDDPerformGETForThePostNumberTHENSeeAuthorNameAs(String postNumber, String authorName) throws Throwable {
-        System.out.println("Post number "+postNumber+ " author name is "+authorName+" -- Asserting");
-        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
-                then().body("author", is("saransh1337"));
+    public void iAAA_BDDPerformGETForThePostNumberTHENSeeAuthorNameAs(String authorName) throws Throwable {
+
 
     }
 }
