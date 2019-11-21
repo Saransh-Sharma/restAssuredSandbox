@@ -25,7 +25,9 @@ public class BDDStyleMethod {
                     .get("http://localhost:3000/posts/").
                 then()
       //              .body("author", containsInAnyOrder("saransh1337", "Carl Sagan", "Richard Feynman", "Sam Harris", "Joe Rogan"));
-                    .body("author", containsInAnyOrder( "Carl Sagan", "saransh1337", "Richard Feynman", "Sam Harris", "Joe Rogan"));
+                    .body("author",
+                            containsInAnyOrder( "Carl Sagan", "saransh1337", "Richard Feynman", "Sam Harris", "Joe Rogan"))
+                        .statusCode(200);
     }
 
 }

@@ -13,22 +13,23 @@ import static io.restassured.RestAssured.given;
 
 public class GetPost3_BDDClashSolution {
 
-    String  post = "0";
-
     @Given("^I perform BDD style GET operation for \"([^\"]*)\"$")
     public void iPerformBDDStyleGETOperationFor(String url) throws Throwable {
+        // leaving this empty is an anti-pattern but bear with me !
+        //we'll soon build a more elegant solution
     }
 
     @And("^I perform BDD style GET for post number \"([^\"]*)\"$")
     public void iPerformBDDStyleGETForPostNumber(String postNumber) throws Throwable {
 
         BDDStyleMethod.SimpleGETPost(postNumber);
-//        setPostNumber(postNumber);
+
     }
 
     @Then("^I BDD style should see the author name as \"([^\"]*)\"$")
     public void iBDDStyleShouldSeeTheAuthorNameAs(String name) throws Throwable {
-        //BDDStyleMethod.SimpleGETPost(postNumber);
+        // leaving this empty is an anti-pattern but bear with me !
+        //we'll soon build a more elegant solution
     }
 
     @Then("^I BDD style should see all the author names$")
