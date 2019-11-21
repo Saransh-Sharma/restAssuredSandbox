@@ -12,8 +12,12 @@ public class BDDStyleMethod {
 
     public static void SimpleGETPost(String postNumber) {
 
-        given().contentType(ContentType.JSON).
-                when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
+                    given().
+                            contentType(ContentType.JSON).
+                    with().
+                            pathParams("postNumber","1").
+                    when().
+                    get(("http://localhost:3000/posts/{postNumber}")).
                 then().body("author", is("saransh1337")).     //then().body("author", containsInAnyOrder("saransh1337", "saransh1337", null)).
                 statusCode(200);
     }
