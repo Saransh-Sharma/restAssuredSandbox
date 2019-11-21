@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
 
-public class GetPost_AAA_BDD {
+public class GetPost2_AAA_BDD {
     @Given("^I AAA_BDD perform GET operation for \"([^\"]*)\"$")
     public void iAAA_BDDPerformGETOperationFor(String url) throws Throwable {
 
@@ -20,8 +20,9 @@ public class GetPost_AAA_BDD {
 
     @And("^I AAA_BDD perform GET for the post number \"([^\"]*)\"$")
     public void iAAA_BDDPerformGETForThePostNumber(String postNumber) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+        when().get(String.format("http://localhost:3000/posts%s",postNumber));
+
     }
 
     @Then("^I AAA_BDD should see the author name as \"([^\"]*)\"$")

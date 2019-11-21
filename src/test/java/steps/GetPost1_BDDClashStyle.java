@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 
 
-public class GetPost_BDDClashStyle {
+public class GetPost1_BDDClashStyle {
     @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String url) throws Throwable {
         System.out.println("I perform GEToperation for posts");
@@ -47,7 +47,7 @@ public class GetPost_BDDClashStyle {
     @And("^I perform GET for the post number \"([^\"]*)\" THEN see author name as \"([^\"]*)\"$")
     public void iPerformGETForThePostNumberTHENSeeAuthorNameAs(String postNumber, String authorName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).
+        when().get(String.format("http://localhost:3000/posts/%s", postNumber)).     // <<<-------------- BIG PROBLEM ! BDD Rest Assured - Cuccumber clash !
                 then().body("author", is("saransh1337"));
     }
 }
