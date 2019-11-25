@@ -10,3 +10,4 @@ Feature:
   Scenario: Verify BDD CLASH SOLUTION all authors of posts via BDD style method
     Given I perform BDD style GET operation for "/post"
     Then I BDD style should see all the author names
+
