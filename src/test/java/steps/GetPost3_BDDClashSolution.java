@@ -36,4 +36,9 @@ public class GetPost3_BDDClashSolution {
     public void iBDDStyleShouldSeeAllTheAuthorNames() {
         BDDStyleMethod.PerformContainsCollection();
     }
+
+    @And("^I perform GET using QueryParams for post number \"([^\"]*)\"$")
+    public void iPerformGETUsingQueryParamsForPostNumber(String postNum) throws Throwable {
+        BDDStyleMethod.performWithPathParams(postNum);
+    }
 }

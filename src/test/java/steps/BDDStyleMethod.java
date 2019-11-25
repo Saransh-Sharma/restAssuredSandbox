@@ -34,16 +34,16 @@ public class BDDStyleMethod {
     }
 
     //solution 2 type 1: get with custom query params
-    public static void performWithPathParams() {
+    public static void performWithPathParams(String postNum) {
 
         given().
-                contentType(ContentType.JSON).
+                    contentType(ContentType.JSON).
                 with().
-                pathParams("postNumber","1").
+                    pathParams("postNumber",postNum).
                 when().
-                get(("http://localhost:3000/posts/{postNumber}")).
+                    get(("http://localhost:3000/posts/{postNumber}")).
                 then().body("author", is("saransh1337")).     //then().body("author", containsInAnyOrder("saransh1337", "saransh1337", null)).
-                statusCode(200);
+                    statusCode(200);
     }
 
 }
