@@ -9,6 +9,7 @@ import io.restassured.specification.RequestSpecification;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class  RestAssuredExtension{
@@ -37,14 +38,30 @@ public class  RestAssuredExtension{
         }
     }
 
+    //ACT
     public static ResponseOptions<Response> GetOps(String url) {
 
-        //ACT
+
         try {
             return Request.get(new URI(url));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    //ACT
+    public static ResponseOptions<Response> PostOpsWithPathAndBodyParams(String url, Map<String, String> pathParams, Map<String, String> bodyParams) {
+
+        Request.pathParams(pathParams);
+        Request.body(bodyParams);
+        try {
+            return Request.post(new URI(url));
+        } catch (URISyntaxException e) {
+            System.out.println("Failed to POST !");
+            e.printStackTrace();
+        }
+
         return null;
     }
 }
