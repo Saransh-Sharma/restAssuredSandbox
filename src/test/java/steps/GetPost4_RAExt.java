@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -15,6 +16,7 @@ import utilities.RestAssuredExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -41,8 +43,34 @@ public class GetPost4_RAExt {
 
         assertThat(response.getBody().jsonPath().get("author"), hasItem("saransh1337"));
 
+    }
 
+    @Given("^I perform POST operation for \"([^\"]*)\" with body$")
+    public void iPerformPOSTOperationForWithBody(String url, DataTable table) throws Throwable { //this is cucumber DataTable that's being  used
 
+        var data = table.raw(); //Turn table to raw data
 
+        System.out.println("*********************");
+        System.out.println("Printing data table values");
+        System.out.println("get(0) - " + data.get(0));
+        System.out.println("get(1) - " + data.get(1));
+        System.out.println("name - " + data.get(1).get(0));
+        System.out.println("profileNo - " + data.get(1).get(1));
+
+        //Set body
+        HashMap<String, String> body = new HashMap<>();
+        body.put("name", data.get(1).get(0));
+
+        //Set path params
+        HashMap<String, String> pathParams = new HashMap<>();
+        pathParams.put("profileNo", data.get(1).get(1));
+
+        response = RestAssuredExtension.PostOpsWithPathAndBodyParams(url, pathParams, body);
+
+    }
+
+    @Then("^I should see the body has name as \"([^\"]*)\"$")
+    public void iShouldSeeTheBodyHasNameAs(String name)  {
+        assertThat(response.getBody().jsonPath().get("name"), hasItem(name));
     }
 }
