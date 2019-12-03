@@ -41,4 +41,15 @@ public class GetPost3_BDDClashSolution {
     public void iPerformGETUsingQueryParamsForPostNumber(String postNum) throws Throwable {
         BDDStyleMethod.performWithPathParams(postNum);
     }
+
+    @Given("^I perform POST operation for \"([^\"]*)\"$")
+    public void iPerformPOSTOperationFor(String postNumber) throws Throwable {
+        BDDStyleMethod.performWithPathParams(postNumber);
+    }
+
+    @Then("^I should see verify GET parameter$")
+    public void iShouldSeeVerifyGETParameter() {
+        BDDStyleMethod.PerformPOSTWithBody();
+    }
+
 }
