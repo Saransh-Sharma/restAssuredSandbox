@@ -51,17 +51,12 @@ public class  RestAssuredExtension{
     }
 
     //ACT
-    public static ResponseOptions<Response> PostOpsWithPathAndBodyParams(String url, Map<String, String> pathParams, Map<String, String> bodyParams) {
+    public static ResponseOptions<Response> PostOpsWithPathAndBodyParams(String url, Map<String, String> pathParams, Map<String, String> bodyParams) throws Exception {
 
         Request.pathParams(pathParams);
         Request.body(bodyParams);
-        try {
-            return Request.post(new URI(url));
-        } catch (URISyntaxException e) {
-            System.out.println("Failed to POST !");
-            e.printStackTrace();
-        }
-
-        return null;
+        return Request.post((url));
     }
+
+
 }
