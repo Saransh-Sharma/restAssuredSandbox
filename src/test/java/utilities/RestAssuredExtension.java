@@ -9,8 +9,9 @@ import io.restassured.specification.RequestSpecification;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
+
+import static io.restassured.RestAssured.put;
 
 public class  RestAssuredExtension{
 
@@ -28,14 +29,16 @@ public class  RestAssuredExtension{
     }
 
     // ACT
-    public static void GetOpsWithPathParameter(String url, Map<String, String> pathParams)  {
+    public static ResponseOptions<Response> GetOpsWithPathParameter(String url, Map<String, String> pathParams) {
 
         Request.pathParams(pathParams);
-        try {
-            Request.get(new URI(url));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Request.get(new URI(url));
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+        return Request.get((url));
     }
 
     //ACT
@@ -51,12 +54,38 @@ public class  RestAssuredExtension{
     }
 
     //ACT
-    public static ResponseOptions<Response> PostOpsWithPathAndBodyParams(String url, Map<String, String> pathParams, Map<String, String> bodyParams) throws Exception {
+    public static ResponseOptions<Response> PostOpsWithPathAndBodyParams(String url, Map<String, String> pathParams, Map<String, String> bodyParams) {
 
         Request.pathParams(pathParams);
         Request.body(bodyParams);
         return Request.post((url));
     }
 
+    //ACT
+    public static ResponseOptions<Response> PostOpsWithBodyParams(String url, Map<String, String> bodyParams) {
 
+        Request.body(bodyParams);
+        return Request.post((url));
+    }
+
+    //ACT
+    public static ResponseOptions<Response> DeleteOpsWithParams(String url, Map<String, String> pathParams) {
+
+        Request.pathParams((pathParams));
+        return Request.delete(url);
+    }
+
+
+    public static ResponseOptions<Response> PUTOpsWithBody(String url, Map<String, String> bodyParams) {
+
+        Request.body(bodyParams);
+        return Request.put(url);
+    }
+
+    public static ResponseOptions<Response> PUTOpsWithBodyAndPathParams(String url, Map<String, String> bodyParams, Map<String, String> pathParams) {
+
+        Request.pathParams(pathParams);
+        Request.body(bodyParams);
+        return Request.put(url);
+    }
 }
