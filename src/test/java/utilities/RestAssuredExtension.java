@@ -11,7 +11,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-import static io.restassured.RestAssured.put;
 
 public class  RestAssuredExtension{
 
@@ -32,12 +31,6 @@ public class  RestAssuredExtension{
     public static ResponseOptions<Response> GetOpsWithPathParameter(String url, Map<String, String> pathParams) {
 
         Request.pathParams(pathParams);
-//        try {
-//            Request.get(new URI(url));
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
         return Request.get((url));
     }
 
@@ -75,13 +68,14 @@ public class  RestAssuredExtension{
         return Request.delete(url);
     }
 
-
+    //ACT
     public static ResponseOptions<Response> PUTOpsWithBody(String url, Map<String, String> bodyParams) {
 
         Request.body(bodyParams);
         return Request.put(url);
     }
 
+    //ACT
     public static ResponseOptions<Response> PUTOpsWithBodyAndPathParams(String url, Map<String, String> bodyParams, Map<String, String> pathParams) {
 
         Request.pathParams(pathParams);
