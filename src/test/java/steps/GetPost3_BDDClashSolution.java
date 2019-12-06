@@ -49,7 +49,7 @@ public class GetPost3_BDDClashSolution {
 
     @Then("^I should see verify GET parameter$")
     public void iShouldSeeVerifyGETParameter() {
-        BDDStyleMethod.PerformPOSTWithBody();
+
     }
 
 }
