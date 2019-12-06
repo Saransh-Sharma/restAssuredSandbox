@@ -48,6 +48,6 @@ public class GetPost1_BDDClashStyle {
     public void iPerformGETForThePostNumberTHENSeeAuthorNameAs(String postNumber, String authorName) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         when().get(String.format("http://localhost:3000/posts/%s", postNumber)).     // <<<-------------- BIG PROBLEM ! BDD Rest Assured - Cuccumber clash !
-                then().body("author", is("saransh1337"));
+                then().body("author", is(authorName));
     }
 }

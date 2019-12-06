@@ -11,15 +11,16 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
+import org.hamcrest.core.IsNot;
 import org.junit.runner.Request;
 import utilities.RestAssuredExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 
@@ -80,6 +81,108 @@ public class GetPost4_RAExt {
         System.out.println("###############################");
         System.out.println("name is: "+response.getBody().jsonPath().get("name"));
         //assertThat(response.getBody().jsonPath().get("name"), hasItem(name));
-        assertThat(response.getBody().jsonPath().get("name"), is("Sams"));
+        assertThat(response.getBody().jsonPath().get("name"), is(name));
+    }
+
+    @Given("^I ensure to perform get operation for \"([^\"]*)\" with body as$")
+    public void iEnsureToPerformGetOperationForWithBodyAs(String url, DataTable table) throws Throwable {
+
+        var data = table.raw();
+
+        Map<String, String> body = new HashMap<>();
+        body.put("id", data.get(1).get(0));
+        body.put("title", data.get(1).get(1));
+        body.put("author", data.get(1).get(2));
+
+        //perform post
+        response = RestAssuredExtension.PostOpsWithBodyParams(url, body);
+    }
+
+    @And("^I perform DELETE operation for \"([^\"]*)\"$")
+    public void iPerformDELETEOperationFor(String url, DataTable table) throws Throwable {
+
+        var data = table.raw();
+
+        Map<String, String> pathParams = new HashMap<>();
+        pathParams.put("postid", data.get(1).get(0));
+
+
+        //Perform Delete operation
+        response = RestAssuredExtension.DeleteOpsWithParams(url, pathParams);
+    }
+
+    @And("^I perform GET operation with path parameter for \"([^\"]*)\"$")
+    public void iPerformGETOperationWithPathParameterFor(String url, DataTable table) throws Throwable {
+
+        var data = table.raw();
+
+        Map<String, String> pathParams = new HashMap<>();
+        pathParams.put("postid", data.get(1).get(0));
+
+        response = RestAssuredExtension.GetOpsWithPathParameter(url, pathParams);
+    }
+
+    @Then("^I should not see the body with title as \"([^\"]*)\"$")
+    public void iShouldNotSeeTheBodyWithTitleAs(String title) throws Throwable {
+
+        //assertThat(response.getBody().jsonPath().get("name"), equalTo(name));
+
+
+//        if (response.getBody().jsonPath().get("name").toString().isEmpty() ) {
+//            System.out.println("----------------");
+//            System.out.println("Is null");
+//            System.out.println("----------------");
+//        } else  {
+//            System.out.println("----------------");
+//            System.out.println("Is NOT null");
+//            System.out.println("----------------");
+//            assertThat(response.getBody().jsonPath().get("name"), IsNot.not(name));
+//        }
+
+        assertThat(response.getBody().jsonPath().get("title"), IsNot.not(title));
+        //assertThat(response.getBody().jsonPath().get("name"), IsNot.not(nullValue()));
+
+    }
+
+    @Given("^I ensure to perform POST operation for \"([^\"]*)\" with body as$")
+    public void iEnsureToPerformPOSTOperationForWithBodyAs(String url, DataTable table) {
+        var data = table.raw();
+
+        Map<String, String> body = new HashMap<>();
+        body.put("id", data.get(1).get(0));
+        body.put("title", data.get(1).get(1));
+        body.put("author", data.get(1).get(2));
+
+        //perform post
+        response = RestAssuredExtension.PostOpsWithBodyParams(url, body);
+    }
+
+
+    @And("^I perform PUT operation for \"([^\"]*)\"$")
+    public void iPerformPUTOperationFor(String url, DataTable table) throws Throwable {
+
+        var data = table.raw();
+        Map<String, String> body = new HashMap<>();
+        Map<String, String> pathParams = new HashMap<>();
+
+        body.put("id", data.get(1).get(0));
+        body.put("title", data.get(1).get(1));
+        body.put("author", data.get(1).get(2));
+        pathParams.put("postid", data.get(1).get(0));
+
+        response = RestAssuredExtension.PUTOpsWithBodyAndPathParams(url, body, pathParams);
+
+    }
+
+    @And("^I perform Get operation with path parameters for \"([^\"]*)\"$")
+    public void iPerformGetOperationWithPathParametersFor(String url, DataTable table) {
+
+        var data = table.raw();
+
+        Map<String, String>pathParams = new HashMap<>();
+        pathParams.put("postid", data.get(1).get(0));
+
+        response = RestAssuredExtension.GetOpsWithPathParameter(url, pathParams);
+
     }
 }
