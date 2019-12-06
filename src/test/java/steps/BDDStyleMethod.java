@@ -28,15 +28,13 @@ public class BDDStyleMethod {
                 .when()
                     .get("http://localhost:3000/posts/").
                 then()
-      //              .body("author", containsInAnyOrder("saransh1337", "Carl Sagan", "Richard Feynman", "Sam Harris", "Joe Rogan"));
                     .body("author",
-                            containsInAnyOrder( "Carl Sagan", "saransh1337", "Richard Feynman", "Sam Harris", "Joe Rogan","Author_6", "Author_7"))
+                            containsInAnyOrder( "saransh1337", "Carl Sagan", "Richard Feynman", "Sam Harris", "Joe Rogan", "Author_6", "Author_7", "Author_8", "Carl Marx"))
                         .statusCode(200);
     }
 
     //solution 2 type 1: get with custom query params
     public static void performWithPathParams(String postNum) {
-
         postNum = "4";
         given().
                     contentType(ContentType.JSON).
