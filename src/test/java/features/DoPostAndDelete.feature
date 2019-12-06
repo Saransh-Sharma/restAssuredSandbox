@@ -5,17 +5,14 @@ Feature:
   Scenario: Verify POST operation for Profile
   Given I perform POST operation for "/posts/{profileNo}/profile" with body
     | name | profile |
-    | Sams | 2       |
-  Then I should see the body has name as "Sams"
+    | saransh1337 | 3       |
+  Then I should see the body has name as "saransh1337"
 
   Scenario: Verify DELETE operation after POST
     Given I ensure to perform get operation for "/posts" with body as
-      | id | title      | author      |
-      | 6  | Death of the Wehrmach | Robert M. Citino |
-    And I perform DELETE operation for "/posts/[postid]/"
+      | id | title                  | author           |
+      | 9  | Death of the Wehrmacht | Robert M. Citino |
+    And I perform DELETE operation for "/posts/{postid}/"
       | postid |
-      | 6      |
-    And I perform GET operation with path parameter for "/posts/{postid}"
-      | postid |
-      | 6      |
+      | 9      |
     Then I should not see the body with title as "API Testing course"
