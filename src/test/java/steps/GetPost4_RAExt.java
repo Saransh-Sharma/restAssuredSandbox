@@ -122,26 +122,16 @@ public class GetPost4_RAExt {
         response = RestAssuredExtension.GetOpsWithPathParameter(url, pathParams);
     }
 
-    @Then("^I should not see the body with title as \"([^\"]*)\"$")
-    public void iShouldNotSeeTheBodyWithTitleAs(String title) throws Throwable {
+//    @Then("^I should not see the body with title as \"([^\"]*)\"$")
+    @Then("^I \"([^\"]*)\" see the body with title as \"([^\"]*)\"$")
+    public void iShouldNotSeeTheBodyWithTitleAs(String condition, String title) throws Throwable {
 
-        //assertThat(response.getBody().jsonPath().get("name"), equalTo(name));
-
-
-//        if (response.getBody().jsonPath().get("name").toString().isEmpty() ) {
-//            System.out.println("----------------");
-//            System.out.println("Is null");
-//            System.out.println("----------------");
-//        } else  {
-//            System.out.println("----------------");
-//            System.out.println("Is NOT null");
-//            System.out.println("----------------");
-//            assertThat(response.getBody().jsonPath().get("name"), IsNot.not(name));
-//        }
-
-        assertThat(response.getBody().jsonPath().get("title"), IsNot.not(title));
-        //assertThat(response.getBody().jsonPath().get("name"), IsNot.not(nullValue()));
-
+        if(condition.equalsIgnoreCase("should not")) {
+            assertThat(response.getBody().jsonPath().get("title"), IsNot.not(title));
+        }
+        else {
+            assertThat(response.getBody().jsonPath().get("title"), is(title));
+        }
     }
 
     @Given("^I ensure to perform POST operation for \"([^\"]*)\" with body as$")
